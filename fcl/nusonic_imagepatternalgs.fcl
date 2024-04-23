@@ -1,0 +1,61 @@
+#include "pointidalg.fcl"
+#include "imagepatternalgs.fcl"
+
+BEGIN_PROLOG
+
+nusonic_emtrackmichelid: {
+  BatchSize: 256
+  ClusterModuleLabel: "pandora"
+  HitModuleLabel: "hitpdune"
+  PointIdAlg: {
+    AdcMax: 30
+    AdcMin: -10
+    BlurKernel: []
+    CalibrateAmpl: true
+    CalibrateLifetime: true
+    CalorimetryAlg: {
+      CalAmpConstants: [
+        9.033e-4,
+        1.0287e-3,
+        8.8e-4
+      ]
+      CalAreaConstants: [
+        4.833e-3,
+        4.815e-3,
+        4.966e-3
+      ]
+      CaloDoLifeTimeCorrection: true
+      CaloLifeTimeForm: 0
+      CaloUseModBox: true
+    }
+    CoherentSigma: 0
+    DownscaleFn: "mean"
+    DownscaleFullView: true
+    DriftWindow: 6
+    #NNetModelFile: "CnnModels/cnn_emtrkmichl_pitch_5_wire_48_drift_48_down_6_mean_notes_protoduneBeamAndCosmicsMCC11.pb"
+    NNetModelFile: "1/model.graphdef"
+    NNetOutputs: [
+      "track",
+      "em",
+      "none",
+      "michel"
+    ]
+    NoiseSigma: 0
+    OutMax: 15
+    OutMin: -5
+    PatchSizeD: 48
+    PatchSizeW: 48
+    TritonModelName:    "cnn_emtrkmichel_1"
+    TritonURL:      "localhost:8001"
+    TritonModelVersion: ""
+    TritonVerbose:  true
+    tool_type: "PointIdAlgSonicTriton"
+  }
+  TrackModuleLabel: ""
+  Views: []
+  WireLabel: "wclsdatasp:gauss"
+  module_label: "emtrkmichelid"
+  module_type: "EmTrackMichelIdTl"
+}
+
+END_PROLOG
